@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "/home/lberoiza/Projects/Astro/photo-gallery",
     "paths": {
       "@/*": [
         "src/*"
@@ -15,6 +15,7 @@
       "@/data": [
         "src/data/*"
       ]
-    }
+    },
+    "jsx": "preserve"
   }
 }

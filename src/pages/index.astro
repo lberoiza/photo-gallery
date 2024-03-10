@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { galleryInformation } from "@/data/data";
 import { Photo } from "@/models/Photo.model";
-import PhotoCard from "@/components/PhotoCard.astro";
+import PhotoCard from "@/components/PhotoCard.vue";
+import PhotoDetails from "../components/PhotoDetails.vue";
 
 const photos: Photo[] = galleryInformation.photos;
 ---
@@ -10,35 +11,55 @@ const photos: Photo[] = galleryInformation.photos;
 
 <Layout title={galleryInformation.title}>
     <main>
-        <h1>{galleryInformation.title}</h1>
+        <h1 class="main__title">{galleryInformation.title}</h1>
         <div class="main__imagecontainer">
           {photos.map((photo, index) => (
-            <PhotoCard photo={photo} key={index} />
+                  <PhotoCard client:visible photo={photo} key={index}/>
           ))}
         </div>
+        <PhotoDetails client:visible/>
     </main>
 </Layout>
 
 <style>
-
-  h1 {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
 
   main {
     margin: 0 auto;
     padding: 1rem;
     width: 90%;
     max-width: 1400px;
+    display: grid;
+    gap: 2rem;
+    place-items: center;
+  }
+
+  .main__title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7rem;
+    text-shadow: black 0.5rem 0.5rem 1rem 1rem;
+    position: relative;
+
+  }
+
+  .main__title::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 100%;
+    height: 0.5rem;
+    background-color: var(--color-text);
   }
 
   .main__imagecontainer {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
   }
-
 
 
 </style>
